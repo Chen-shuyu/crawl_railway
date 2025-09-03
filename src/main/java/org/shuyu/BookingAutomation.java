@@ -1,9 +1,12 @@
 package org.shuyu;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -20,6 +23,8 @@ public class BookingAutomation {
     private static final Integer SEAT_COUNT = 2;
     private static final String DATE = "20250928";
     private static final String TRAIN_NO = "136";
+
+    private static final String BASE_URL = "https://tip.railway.gov.tw/tra-tip-web/tip/tip001/tip121/query";
 
 
     private WebDriver driver;
@@ -74,29 +79,102 @@ public class BookingAutomation {
     }
 
     /**
-     * 執行完整的訂位流程
+     * 執行完整的訂票流程
      */
     public void executeBookingProcess() {
         try {
             // 步驟 1: 開啟首頁並登入
-//            loginToWebsite();
+            loginToWebsite();
 
-            // 步驟 2: 導航到訂位頁面
-//            navigateToBookingPage();
+            // 步驟 2: 填寫訂票資訊
+            fillBookingInformation();
 
-            // 步驟 3: 處理說明頁面彈窗
-//            handleInfoModal();
+            // 步驟 3: 點選 我不是機器人
+            clickReCaptchaButton();
 
-            // 步驟 4: 填寫訂位資訊
-//            fillBookingInformation();
+            // 步驟 4: 點選 訂票
+            clickBookingButton();
 
-            // 步驟 5: 點選搜尋
-//            clickSearchButton();
-
-            logger.info("訂位流程執行完成");
+            logger.info("訂票流程執行完成");
 
         } catch (Exception e) {
-            logger.error("訂位流程執行失敗: {}", e.getMessage(), e);
+            logger.error("訂票流程執行失敗: {}", e.getMessage(), e);
         }
     }
+
+
+
+    /**
+     * 登入網站
+     */
+    private void loginToWebsite() throws Exception {
+        logger.info("開啟訂購頁面...");
+        // 開啟首頁
+        driver.get(BASE_URL);
+        Thread.sleep(3000);
+    }
+
+    /**
+     * 填寫訂票資訊
+     */
+    private void fillBookingInformation()  throws Exception {
+        logger.info("開始填寫訂票資訊...");
+
+        // 填寫身分證字號
+        fillUserId();
+
+        // 選擇出發站
+        selectDeparture();
+
+        // 選擇抵達站
+        selectArrival();
+
+        // 選擇坐票數
+        selectSeat();
+
+        // 選擇日期
+        selectDate();
+
+        // 選擇車次
+        fillTrainNo();
+
+        logger.info("訂票資訊填寫完成");
+    }
+
+    // 選擇車次
+    private void fillTrainNo() {
+    }
+
+    // 選擇日期
+    private void selectDate() {
+    }
+
+    // 選擇坐票數
+    private void selectSeat() {
+    }
+
+    // 選擇抵達站
+    private void selectArrival() {
+    }
+
+    // 選擇出發站
+    private void selectDeparture() {
+    }
+
+    // 填寫身分證字號
+    private void fillUserId() {
+    }
+
+    /**
+     * 點選 我不是機器人
+     */
+    private void clickReCaptchaButton() {
+    }
+
+    /**
+     * 點選 訂票
+     */
+    private void clickBookingButton() {
+    }
+
 }

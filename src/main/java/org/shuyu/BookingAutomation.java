@@ -1,12 +1,8 @@
 package org.shuyu;
 
-import io.github.bonigarcia.wdm.WebDriverManager;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.shuyu.utils.ConfigReader;
 import org.slf4j.Logger;
@@ -17,17 +13,17 @@ import java.util.concurrent.TimeUnit;
 public class BookingAutomation {
 
     private static final Logger logger = LoggerFactory.getLogger(BookingAutomation.class);
+    private static final ConfigReader config = new ConfigReader();
 
-    private static final String USER_ID = "C121383301";
-    private static final String DEPARTURE = "臺北";
-    private static final String ARRIVAL = "臺中";
-    private static final Integer SEAT_COUNT = 2;
-    private static final String DATE = "20250928";
-    private static final String TRAIN_NO = "136";
+    private static final String USER_ID = config.getUserId();
+    private static final String DEPARTURE = config.getDeparture();
+    private static final String ARRIVAL = config.getArrival();
+    private static final Integer SEAT_COUNT = Integer.parseInt(config.getSeatCount());
+    private static final String DATE = config.getDate();
+    private static final String TRAIN_NO = config.getTrainNo();
 
     private static final String BASE_URL = "https://tip.railway.gov.tw/tra-tip-web/tip/tip001/tip121/query";
 
-    private static final ConfigReader config = new ConfigReader();
     private WebDriver driver;
     private WebDriverWait wait;
 
@@ -106,7 +102,6 @@ public class BookingAutomation {
     }
 
 
-
     /**
      * 登入網站
      */
@@ -120,7 +115,7 @@ public class BookingAutomation {
     /**
      * 填寫訂票資訊
      */
-    private void fillBookingInformation()  throws Exception {
+    private void fillBookingInformation() throws Exception {
         logger.info("開始填寫訂票資訊...");
 
         // 填寫身分證字號

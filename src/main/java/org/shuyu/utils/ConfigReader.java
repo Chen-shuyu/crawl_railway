@@ -26,4 +26,22 @@ public class ConfigReader {
     public String getChromeDriverPath() {
         return properties.getProperty("webdriver.chrome.driver");
     }
+    public String getUserId() {
+        return properties.getProperty("booking.info.userId");
+    }
+    public String getDeparture() {
+        return properties.getProperty("booking.info.departure");
+    }
+    public String getArrival() {
+        return properties.getProperty("booking.info.arrival");
+    }
+    public String getSeatCount() {
+        return properties.getProperty("booking.info.seatCount");
+    }
+    public String getDate() {
+        return properties.getProperty("booking.info.date");
+    }
+    public String getTrainNo() {
+        return properties.getProperty("booking.info.trainNo");
+    }
 }

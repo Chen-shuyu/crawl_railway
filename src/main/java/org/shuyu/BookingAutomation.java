@@ -8,6 +8,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.shuyu.utils.ConfigReader;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -26,7 +27,7 @@ public class BookingAutomation {
 
     private static final String BASE_URL = "https://tip.railway.gov.tw/tra-tip-web/tip/tip001/tip121/query";
 
-
+    private static final ConfigReader config = new ConfigReader();
     private WebDriver driver;
     private WebDriverWait wait;
 
@@ -41,7 +42,9 @@ public class BookingAutomation {
         try {
             logger.info("開始初始化 WebDriver...");
 
-            WebDriverManager.chromedriver().setup();
+//            WebDriverManager.chromedriver().setup();
+            String driverPath = config.getChromeDriverPath();
+            System.setProperty("webdriver.chrome.driver", driverPath);
 
             ChromeOptions options = new ChromeOptions();
             options.addArguments("--disable-blink-features=AutomationControlled");

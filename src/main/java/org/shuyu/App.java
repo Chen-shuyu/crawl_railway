@@ -21,8 +21,8 @@ public class App
             automation.executeBookingProcess();
 
             // 保持瀏覽器開啟，讓您檢查結果
-            logger.info("訂位流程完成，瀏覽器將在 30 秒後關閉，請檢查結果...");
-            Thread.sleep(30000);
+            logger.info("訂位流程完成，瀏覽器將在 15 秒後關閉，請檢查結果...");
+            Thread.sleep(15000);
 
         } catch (Exception e) {
             logger.error("程式執行失敗: {}", e.getMessage(), e);
